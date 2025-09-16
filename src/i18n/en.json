@@ -1,0 +1,26 @@
+{
+  "menu": {
+    "home": "Home",
+    "gallery": "Gallery",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Music lessons for all ages and styles",
+    "subtitle": "Guitar, keyboard, singing and more — practical, motivating methodology.",
+    "cta": "Chat on WhatsApp"
+  },
+  "about": {
+    "title": "About the School",
+    "text": "Escola de Música Estação Musical offers personalized lessons in Manaíra (João Pessoa). Our goal is to build technique and musicianship with joy and consistency."
+  },
+  "gallery": {
+    "title": "Highlights"
+  },
+  "contact": {
+    "title": "Visit us",
+    "address_label": "Address"
+  },
+  "footer": {
+    "rights": "© {{year}} Escola Estação Musical. All rights reserved."
+  }
+}

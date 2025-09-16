@@ -1,0 +1,26 @@
+{
+  "menu": {
+    "home": "Início",
+    "gallery": "Galeria",
+    "contact": "Contato"
+  },
+  "hero": {
+    "title": "Aulas de música para todas as idades e estilos",
+    "subtitle": "Violão, teclado, canto e muito mais — com metodologia prática e motivadora.",
+    "cta": "Fale no WhatsApp"
+  },
+  "about": {
+    "title": "Sobre a Escola",
+    "text": "A Escola de Música Estação Musical oferece aulas personalizadas em Manaíra (João Pessoa). Nosso foco é desenvolver técnica e musicalidade com prazer e constância."
+  },
+  "gallery": {
+    "title": "Momentos da Estação"
+  },
+  "contact": {
+    "title": "Onde estamos",
+    "address_label": "Endereço"
+  },
+  "footer": {
+    "rights": "© {{year}} Escola Estação Musical. Todos os direitos reservados."
+  }
+}
