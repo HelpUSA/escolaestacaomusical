@@ -1,3 +1,4 @@
+// src/App.jsx
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -13,7 +14,7 @@ import { SITE } from './site.config'
 export default function App() {
   const { t } = useTranslation()
   const waLink =
-    `https://wa.me/${SITE.whatsapp.replace(/\D/g,'')}?text=` +
+    `https://wa.me/${SITE.whatsapp.replace(/\D/g, '')}?text=` +
     encodeURIComponent('Olá! Quero saber mais sobre as aulas.')
 
   return (
@@ -22,11 +23,26 @@ export default function App() {
 
       {/* HERO — texto à esquerda e imagem MENOR à direita */}
       <section id="hero" className="container" style={{ marginTop: 16 }}>
+        {/* media query local para mobile */}
+        <style>
+          {`
+            @media (max-width: 640px) {
+              .hero-grid {
+                grid-template-columns: 1fr !important; /* empilha no mobile */
+              }
+              .hero-img {
+                aspect-ratio: 4 / 5;       /* garante altura agradável no celular */
+                height: auto !important;
+              }
+            }
+          `}
+        </style>
+
         <div
-          className="card"
+          className="card hero-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: '1.3fr minmax(240px, 380px)', /* imagem menor */
+            gridTemplateColumns: '1.3fr minmax(240px, 380px)', /* imagem menor no desktop */
             gap: 24,
             alignItems: 'center'
           }}
@@ -44,11 +60,25 @@ export default function App() {
             </div>
           </div>
 
-          <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,.06)'}}>
+          <div
+            style={{
+              borderRadius: 16,
+              overflow: 'hidden',
+              border: '1px solid rgba(255,255,255,.06)'
+            }}
+          >
             <img
               src="/img/imagem01.png"
               alt="Professor Chagas no teclado"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              className="hero-img"
+              loading="lazy"
+              decoding="async"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'left center' // foca no rosto no lado esquerdo
+              }}
             />
           </div>
         </div>
