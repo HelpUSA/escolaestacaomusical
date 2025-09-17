@@ -12,45 +12,32 @@ export default function HeroProfessor() {
     <section className="hero-pro" style={{ padding: '20px 0' }}>
       <style>{`
         .hero-pro{
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          gap:20px;
-          flex-wrap:wrap;
+          display:flex; align-items:center; justify-content:center;
+          gap:20px; flex-wrap:wrap;
         }
-        /* evita que algum CSS global prenda altura do contêiner da foto */
+        /* IMPORTANTES: removem qualquer altura fixa / overflow que causa corte */
         .hero-pro .pfp{
-          width:100%;
-          max-width:560px;
+          width:100%; max-width:560px;
+          height:auto !important;
+          overflow:visible !important;
         }
-        /* garante imagem completa SEM recorte, mesmo com CSS global agressivo */
         .hero-pro .pfp img{
           display:block;
           width:100%;
           max-width:100%;
           height:auto !important;
-          object-fit: contain !important;
+          max-height:none !important;
+          object-fit:contain !important;
+          object-position:center center !important;
           border-radius:12px;
-          aspect-ratio:auto; /* ignora proporções forçadas */
+          aspect-ratio:auto;
         }
-
-        /* card com largura confortável ao lado da foto */
-        .hero-pro .card{
-          max-width:420px;
-        }
+        .hero-pro .card{ max-width:420px; }
 
         @media (max-width:768px){
-          .hero-pro{
-            flex-direction:column;
-            text-align:center;
-          }
-          .hero-pro .pfp{
-            max-width:100%;
-          }
-          .hero-pro .card{
-            width:100%;
-            max-width:640px;
-          }
+          .hero-pro{ flex-direction:column; text-align:center; }
+          .hero-pro .pfp{ max-width:100%; }
+          .hero-pro .card{ width:100%; max-width:640px; }
         }
       `}</style>
 
@@ -61,6 +48,8 @@ export default function HeroProfessor() {
           loading="eager"
           decoding="async"
           sizes="(max-width: 768px) 100vw, 560px"
+          /* reforço inline para vencer CSS global */
+          style={{ width:'100%', height:'auto', objectFit:'contain' }}
         />
       </div>
 

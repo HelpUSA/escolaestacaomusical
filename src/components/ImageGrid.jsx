@@ -1,14 +1,18 @@
 // src/components/ImageGrid.jsx
+import React from 'react'
+
 export default function ImageGrid({ images = [] }) {
+  if (!images?.length) return null
+
   return (
     <section className="image-grid-wrap">
       <style>{`
         .image-grid{
           display:grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
           gap:16px;
         }
-        /* cada tile vira um "quadro" flex para centralizar a imagem completa */
+        /* cada tile é um “quadro” flex: a imagem fica inteira no centro */
         .image-grid .tile{
           background:#121212;
           border-radius:14px;
@@ -16,18 +20,16 @@ export default function ImageGrid({ images = [] }) {
           display:flex;
           align-items:center;
           justify-content:center;
-          /* IMPORTANTE: sem altura fixa aqui */
+          /* sem height fixa, sem absolute */
         }
-        /* a imagem ocupa a largura possível, mantendo proporção, sem recorte */
         .image-grid img{
+          display:block;
           width:100%;
           height:auto;
-          object-fit:contain;   /* sem cortes */
+          object-fit:contain;
           border-radius:10px;
-          display:block;
         }
-        /* se quiser quadros com proporção fixa MAS sem cortar a foto,
-           use aspect-ratio e deixe a imagem caber dentro (letterbox) */
+        /* Caso queira quadros com proporção fixa SEM cortar a foto (letterbox) */
         /* .image-grid .tile{ aspect-ratio: 16/9; } */
       `}</style>
 
