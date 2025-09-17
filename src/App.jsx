@@ -23,36 +23,68 @@ export default function App() {
 
       {/* HERO — texto à esquerda e imagem MENOR à direita */}
       <section id="hero" className="container" style={{ marginTop: 16 }}>
-        {/* media query local para mobile */}
-        <style>
-          {`
-            @media (max-width: 640px) {
-              .hero-grid {
-                grid-template-columns: 1fr !important; /* empilha no mobile */
-              }
-              .hero-img {
-                aspect-ratio: 4 / 5;       /* garante altura agradável no celular */
-                height: auto !important;
-              }
-            }
-          `}
-        </style>
+        {/* CSS local: evita corte da imagem do herói e ajusta mobile */}
+        <style>{`
+          /* -------- HERO -------- */
+          .hero-grid{
+            display:grid;
+            grid-template-columns: 1.3fr minmax(240px, 380px);
+            gap:24px;
+            align-items:center;
+          }
+          .hero-img-wrap{
+            border-radius:16px;
+            border:1px solid rgba(255,255,255,.06);
+            overflow:visible;           /* não esconde sobras (letterbox) */
+            height:auto !important;     /* não fixa altura */
+          }
+          .hero-img{
+            display:block;
+            width:100%;
+            height:auto !important;      /* mantém proporção */
+            object-fit:contain !important; /* SEM cortes */
+            object-position:center center !important;
+            border-radius:16px;
+          }
 
-        <div
-          className="card hero-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1.3fr minmax(240px, 380px)', /* imagem menor no desktop */
-            gap: 24,
-            alignItems: 'center'
-          }}
-        >
+          @media (max-width: 640px){
+            .hero-grid{ grid-template-columns:1fr !important; }
+            .hero-img-wrap{ width:100%; }
+            .hero-img{ width:100%; height:auto !important; }
+          }
+
+          /* -------- GALERIA (overrides para evitar corte/sumiço) -------- */
+          /* Se seu ImageGrid tiver classes iguais, estes overrides garantem o comportamento */
+          #gallery .image-grid{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap:16px;
+          }
+          #gallery .image-grid .tile{
+            background:#121212;
+            border-radius:14px;
+            padding:8px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            /* sem height fixa, sem absolute, sem overflow:hidden */
+          }
+          #gallery .image-grid img{
+            display:block;
+            width:100%;
+            height:auto;                 /* mantém proporção */
+            object-fit:contain;          /* mostra a foto inteira */
+            border-radius:10px;
+          }
+        `}</style>
+
+        <div className="card hero-grid">
           <div>
             <h1 style={{ margin: '0 0 6px 0' }}>{t('hero.title')}</h1>
             <p style={{ color: 'var(--muted)', margin: '0 0 14px 0' }}>
               {t('hero.subtitle')}
             </p>
-            <div style={{ display: 'flex', gap: 12 }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap:'wrap' }}>
               <a className="btn" href={waLink} target="_blank" rel="noreferrer">
                 Falar no WhatsApp
               </a>
@@ -60,25 +92,14 @@ export default function App() {
             </div>
           </div>
 
-          <div
-            style={{
-              borderRadius: 16,
-              overflow: 'hidden',
-              border: '1px solid rgba(255,255,255,.06)'
-            }}
-          >
+          <div className="hero-img-wrap">
             <img
               src="/img/imagem01.png"
               alt="Professor Chagas no teclado"
               className="hero-img"
               loading="lazy"
               decoding="async"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'left center' // foca no rosto no lado esquerdo
-              }}
+              sizes="(max-width: 640px) 100vw, 380px"
             />
           </div>
         </div>
